@@ -12,9 +12,9 @@ Para rodar o projeto basta rodar o comando `yarn start` ou `npm run start`
 ## Bibliotecas utilizadas
 Para utilizar as bibliotecas abaixo é necessário instalá-las globalmente na máquina antes de começar a conversão.
 
-- [https://github.com/CesiumGS/obj2gltf](CesiumGS/obj2gltf) Esta biblioteca converte o arquivo 3d (.obj) em arquivo 3d (.gltf)
-- [https://github.com/CesiumGS/gltf-pipeline](CesiumGS/gltf-pipeline) Esta biblioteca converte o arquivo .gltf convertido para a versão 2.0 do arquivo.gltf
-- [https://github.com/pmndrs/gltfjsx](pmndrs/gltfjsx) Esta biblioteca cria um arquivo .js com as informações do arquivo .gltf para utilizar com a biblioteca @react-three.
+- [CesiumGS/obj2gltf](https://github.com/CesiumGS/obj2gltf) Esta biblioteca converte o arquivo 3d (.obj) em arquivo 3d (.gltf)
+- [CesiumGS/gltf-pipeline](https://github.com/CesiumGS/gltf-pipeline) Esta biblioteca converte o arquivo .gltf convertido para a versão 2.0 do arquivo.gltf
+- [pmndrs/gltfjsx](https://github.com/pmndrs/gltfjsx) Esta biblioteca cria um arquivo .js com as informações do arquivo .gltf para utilizar com a biblioteca @react-three.
 
 ### Utilizando os arquivos convertidos
 
