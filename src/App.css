@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  height: 100vh;
+  background: #000;
 }
 
 .App-logo {
@@ -35,4 +37,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.canvas2 {
+  background: green;
+}
+
+.canvas3 {
+  background: blue;
 }
