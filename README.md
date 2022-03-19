@@ -1,46 +1,82 @@
-# Getting Started with Create React App
+# Projeto para visualização de arquivos 3d
+Neste projeto react foram utilizadas bibliotecas de terceiros como @react-three/drei e @reract-three/fiber para visualizar arquivos 
+3d.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Adicionando as dependências do projeto
+Depois de clonar o repositório rodar.
+`npm install`
 
-## Available Scripts
+### Rodando o projeto
+Para rodar o projeto basta rodar o comando `yarn start` ou `npm run start` 
 
-In the project directory, you can run:
+## Bibliotecas utilizadas
+Para utilizar as bibliotecas abaixo é necessário instalá-las globalmente na máquina antes de começar a conversão.
 
-### `yarn start`
+- [https://github.com/CesiumGS/obj2gltf](CesiumGS/obj2gltf) Esta biblioteca converte o arquivo 3d (.obj) em arquivo 3d (.gltf)
+- [https://github.com/CesiumGS/gltf-pipeline](CesiumGS/gltf-pipeline) Esta biblioteca converte o arquivo .gltf convertido para a versão 2.0 do arquivo.gltf
+- [https://github.com/pmndrs/gltfjsx](pmndrs/gltfjsx) Esta biblioteca cria um arquivo .js com as informações do arquivo .gltf para utilizar com a biblioteca @react-three.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Utilizando os arquivos convertidos
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Depois de realizar os processos de conversão o arquivo .gltf deve ser colocado dentro da pasta public do projeto.
+O arquivo .js dentro da pasta src, recomenda-se colocar o arquivo dentro de uma pasta components/modelos-3d, ficando mais organizado.
 
-### `yarn test`
+### Ajuste no arquivo .js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Em alguns casos será necessário realizar ajustes neste arquivo a fim de ajustar o zoom, posição na tela e rotação da imagem.
+Abaixo o arquivo gerado sem realizar ajustes.
+```jsx
 
-### `yarn build`
+import React, { useRef } from 'react'
+import { useGLTF } from '@react-three/drei'
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export default function Model({ ...props }) {
+  const group = useRef()
+  const { nodes, materials } = useGLTF('/newitem.gltf')
+  return (
+    <group ref={group} {...props} dispose={null}>
+        <mesh geometry={nodes.Layer_0.geometry} material={nodes.Layer_0.material} />
+        <mesh geometry={nodes.Layer_0_1.geometry} material={nodes.Layer_0_1.material} />
+        <mesh geometry={nodes.Layer_0_2.geometry} material={nodes.Layer_0_2.material} />
+        <mesh geometry={nodes.Layer_0_3.geometry} material={nodes.Layer_0_3.material} />
+        <mesh geometry={nodes.Object001.geometry} material={nodes.Object001.material} />
+        <mesh geometry={nodes.Object002.geometry} material={nodes.Object002.material} />
+        <mesh geometry={nodes.Object003.geometry} material={nodes.Object003.material} />
+    </group>
+  )
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+useGLTF.preload('/newitem.gltf')
+```
+Abaixo arquivo com o ajuste
+```jsx
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+import React, { useRef } from 'react'
+import { useGLTF } from '@react-three/drei'
 
-### `yarn eject`
+export default function Model({ ...props }) {
+  const group = useRef()
+  const { nodes, materials } = useGLTF('/newitem.gltf')
+  return (
+    <group ref={group} {...props} dispose={null}>
+    // Nas próximas linhas de group são definidas as configurações para a posição na tela,
+    // rotação da imagem e o zoom que o item deve ter no momento da exibição.
+      <group position={[0,-2,-0.01]} rotation={[-Math.PI / 2, 0, 0]}>
+        <group scale={0.01} rotation={[Math.PI / 2, 0, 0]}>
+          <group scale={1}>
+            <mesh geometry={nodes.Layer_0.geometry} material={nodes.Layer_0.material} />
+            <mesh geometry={nodes.Layer_0_1.geometry} material={nodes.Layer_0_1.material} />
+            <mesh geometry={nodes.Layer_0_2.geometry} material={nodes.Layer_0_2.material} />
+            <mesh geometry={nodes.Layer_0_3.geometry} material={nodes.Layer_0_3.material} />
+            <mesh geometry={nodes.Object001.geometry} material={nodes.Object001.material} />
+            <mesh geometry={nodes.Object002.geometry} material={nodes.Object002.material} />
+            <mesh geometry={nodes.Object003.geometry} material={nodes.Object003.material} />
+          </group>
+        </group>
+      </group>
+    </group>
+  )
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+useGLTF.preload('/newitem.gltf')
+```
