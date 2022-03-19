@@ -80,3 +80,6 @@ export default function Model({ ...props }) {
 
 useGLTF.preload('/newitem.gltf')
 ```
+### Video com o tutorial completo de uso.
+
+Neste vídeo mostra o passo a passo completo para criar o projeto com o 3d [Three.js 3D Elements for your website using ReactJS](https://www.youtube.com/watch?v=wxvSHOrBHbw)
